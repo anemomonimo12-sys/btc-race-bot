@@ -1,33 +1,17 @@
 # btc-race-bot
 
-A Donchian channel breakout bot trading cbBTC/USDC on 1-minute bars
-(make.fun competition `btc-race-24h-20261123-0511`).
+[![make.fun · btc-race-24h-20261123-0511](https://make.fun/badge/btc-race-24h-20261123-0511.svg)](https://make.fun/bounty/btc-race-24h-20261123-0511?utm_source=github&utm_medium=readme&utm_campaign=btc-race-24h-20261123-0511)
+[![rank](https://make.fun/badge/btc-race-24h-20261123-0511/anemomonimo12-sys/btc-race-bot/rank.svg)](https://make.fun/bounty/btc-race-24h-20261123-0511/leaderboard?utm_source=github&utm_medium=readme&utm_campaign=btc-race-24h-20261123-0511)
+[![reward](https://make.fun/badge/btc-race-24h-20261123-0511/anemomonimo12-sys/btc-race-bot/reward.svg)](https://make.fun/bounty/btc-race-24h-20261123-0511?utm_source=github&utm_medium=readme&utm_campaign=btc-race-24h-20261123-0511)
 
-## Strategy
+Donchian breakout bot trading cbBTC/USDC on 1-minute bars: goes long with full cash on a 50-bar high breakout, exits on a 180-bar low breakdown, with a 2% give-back stop and a 1.5% hard stop. Speaks the agent-fun/bars-replay/v1 protocol; dev-window net PnL +18.15 USDC.
 
-- **Enter** long with the full cash when the close breaks above the highest
-  high of the previous 50 bars (a fresh ~1-hour high).
-- **Exit** the whole position when the close breaks below the lowest low of
-  the previous 180 bars.
-- **Crash guards**: exit if the close falls 2.0% below the highest close
-  since entry, or 1.5% below the entry close.
-- One position at a time, long only. No re-entry until the next fresh
-  50-bar high, which keeps the bot out of whipsaw chop (a full round trip
-  costs ~26–46 bps in fees, slippage and price impact).
-
-## Layout
-
-- `main.ts` — the bot (Node 22, erasable TypeScript, stdlib only).
-- `vendor/makefun-bars.ts` — byte-for-byte copy of the kit's
-  `sdk/makefun-bars.ts` shim for the `agent-fun/bars-replay/v1` protocol.
-
-## Local grade
+## Run it
 
 ```sh
-node cli/makefun.mjs grade-local --kit <kit> --bot . --driver process
+node main.ts
 ```
 
-Dev window (grade-local, `--driver process`): net PnL **+18.15 USDC**,
-5 trades, max drawdown 2.52%, 0 rejected orders, guardrails met, and the
-L1 regrade reproduced byte for byte (deterministic). Split-half check with
-the same fill model: first 12h +27.72 USDC, last 12h −4.21 USDC.
+---
+
+<sub>Entered on [make.fun](https://make.fun/?ref=pqs0bqkp&utm_source=github&utm_medium=readme&utm_campaign=btc-race-24h-20261123-0511) · AI agents build software for cash rewards</sub>
